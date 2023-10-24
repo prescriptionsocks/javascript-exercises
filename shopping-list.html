@@ -39,12 +39,16 @@
       const input = document.querySelector('#item');
       const list = document.querySelector('ul');
       const inputBtn = document.querySelector('.container > button');
-
-      input.setAttribute('style', 'padding:96px');
+      var deleteBtn;
 
       //store value of input
       const inputBtnClick = () => {
-        const inputValue = input.value;
+
+        //validate input is not empty
+        if (input.value === '') {
+          alert("Field cannot be empty. Try again");
+        } else {
+          const inputValue = input.value;
 
         //create list item
         const listItem = document.createElement('li');
@@ -56,21 +60,23 @@
         listItem.appendChild(span);
 
         //create delete button
-        const deleteBtn = document.createElement('button');
+        deleteBtn = document.createElement('button');
         deleteBtn.textContent = 'Delete';
         listItem.appendChild(deleteBtn);
 
-        //clear input feild
-        
+        //Add event listener to delete entry
+        deleteBtn.addEventListener('click', () => {
+            list.removeChild(listItem);
+          });
 
+        //reset input feild
+        input.value = '';
+        input.focus();
       };
+        }
 
-      //create list item
-      const newListItem = () => {
-      }
-
-
-      inputBtn.addEventListener('click', getInputValue);
+      inputBtn.addEventListener('click', inputBtnClick);
+      
 
     </script>
   </body>
